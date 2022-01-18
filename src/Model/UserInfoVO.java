@@ -8,10 +8,15 @@ public class UserInfoVO {
 	private int score;
 
 	// 생성자
+	public UserInfoVO() {}
 	public UserInfoVO(String id, String password) {
 		this.id = id;
 		this.password = password;
 		this.score = 0;
+	}
+	public UserInfoVO(String id, int score) {
+		this.id = id;
+		this.score = score;
 	}
 
 	// 메소드
