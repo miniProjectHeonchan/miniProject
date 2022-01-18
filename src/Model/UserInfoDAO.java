@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserInfoDAO {
 	Connection conn = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
+	boolean check = false;
 	
 	public void connect() {
 		try {
@@ -44,8 +46,8 @@ public class UserInfoDAO {
 		}
 	}
 	
-	public boolean insertUser(String id, int password) {
-		boolean check = false;
+	//회원가입 기능
+	public boolean insertUser(String id, String password) {
 		
 		try {
 			//jdbc 드라이버 불러오기
@@ -54,7 +56,7 @@ public class UserInfoDAO {
 			String sql = "INSERT INTO USER_INFO VALUES(?, ?, ?)";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
-			pst.setInt(2, password);
+			pst.setString(2, password);
 			pst.setInt(3, 0);
 			
 			int cnt = pst.executeUpdate();
@@ -67,12 +69,45 @@ public class UserInfoDAO {
 			
 			
 		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("중복된 아이디거나 잘못된 형식입니다!");
 		}finally {
 			close();
 		}
 		return check;
 	}// end of insertUser
+	
+	//로그인 기능
+	public boolean login(String id, String password) {
+		
+		try {
+			//jdbc 드라이버 불러오기
+			connect();
+			
+			String sql = "SELECT ID, PASSWORD FROM USER_INFO";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			
+			while(rs.next()) {
+				String get_id = rs.getString("ID"); //현재 커서가 가르키고 있는 행의 첫번째 컬럼값을 읽어오겠다!
+				String get_password = rs.getString("PASSWORD"); //컬럼이름과 일치하게 작성
+				
+				// 입력받은 id와 데이터베이스 id와 password 비교
+				if(get_id.equals(id) && get_password.equals(password)) {
+					check = true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return check;
+	}// end of login
+	
+	
+	
+	
 	
 	
 	

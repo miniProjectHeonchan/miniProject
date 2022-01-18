@@ -4,15 +4,14 @@ public class UserInfoVO {
 
 	// 필드 : 아이디, 비밀번호, 점수
 	private String id;
-	private int password;
+	private String password;
 	private int score;
 
 	// 생성자
-	public UserInfoVO(String id, int password, int score) {
-		super();
+	public UserInfoVO(String id, String password) {
 		this.id = id;
 		this.password = password;
-		this.score = score;
+		this.score = 0;
 	}
 
 	// 메소드
@@ -20,7 +19,7 @@ public class UserInfoVO {
 		return id;
 	}
 
-	public int getPASSWORD() {
+	public String getPASSWORD() {
 		return password;
 	}
 

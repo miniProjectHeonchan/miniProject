@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class WordListDAO {
 
@@ -45,15 +46,40 @@ public class WordListDAO {
 		}
 	}
 	
-	public void wordMean(int yearNum) {
+	//문제 뜻 불러오는 메소드
+	public ArrayList<WordListVO> wordList(int yearNum) {
 		//jdbc 드라이버 불러오기
 		connect();
 		
+		ArrayList<WordListVO> al = new ArrayList<WordListVO>();
+		
 		try {
-			String sql = "SELECT MEAN FROM WORD_LIST";			
+			String sql = "SELECT * FROM WORD_LIST WHERE YEAR = ?";
+			
+			//4. sql 구문 준비 객체(PreparedStatement) 생성
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, yearNum);
+			//5. sql문을 실행하고 결과 처리
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				String word = rs.getString("WORD"); //현재 커서가 가르키고 있는 행의 첫번째 컬럼값을 읽어오겠다!
+				String mean = rs.getString("MEAN"); //컬럼이름과 일치하게 작성
+				int year = rs.getInt("YEAR");
+				String hint1 = rs.getString("HINT1");
+				String hint2 = rs.getString("HINT2");
+				
+				//위에서 읽어온 값들로 초기화시켜 생성한 StudentVO 객체의 참조값을
+				//ArrayList에 추가
+				al.add(new WordListVO(word, mean, year, hint1, hint2));
+				
+			}
 		}catch (Exception e){
 			e.printStackTrace();
+		}finally {
+			close();
 		}
-		
+		return al;
 	}
 }

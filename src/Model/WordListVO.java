@@ -8,7 +8,6 @@ public class WordListVO {
 	private String hint2;
 
 	public WordListVO(String word, String mean, int year, String hint1, String hint2) {
-		super();
 		this.word = word;
 		this.mean = mean;
 		this.year = year;
