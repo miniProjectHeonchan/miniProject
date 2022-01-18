@@ -44,6 +44,35 @@ public class UserInfoDAO {
 		}
 	}
 	
+	public boolean insertUser(String id, int password) {
+		boolean check = false;
+		
+		try {
+			//jdbc 드라이버 불러오기
+			connect();
+			
+			String sql = "INSERT INTO USER_INFO VALUES(?, ?, ?)";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, id);
+			pst.setInt(2, password);
+			pst.setInt(3, 0);
+			
+			int cnt = pst.executeUpdate();
+			
+			if(cnt>0) {//추가 성공
+				check = true;
+			}else { //추가 실패 
+				check = false;
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return check;
+	}// end of insertUser
 	
 	
 	
