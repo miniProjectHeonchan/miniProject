@@ -67,6 +67,8 @@ public class ViewMain {
 							System.out.print("1번 2000년대, 2번 2010년대, 3번 2020년대 선택 >>> ");
 							int yearNum = sc.nextInt();
 							
+							int score = 0;
+							
 							System.out.println("게임을 시작!!!!");
 							
 							if(yearNum == 1) {// 2000년대
@@ -77,13 +79,17 @@ public class ViewMain {
 								//3. 정답입력
 								
 								yearNum = 2000;
+								ArrayList<WordListVO> vo = wordDAO.wordList(yearNum);
 								
 								for (int i = 0; i < 10; i++) {
 									//문제출력
-									ArrayList<WordListVO> vo = wordDAO.wordList(yearNum);
+									System.out.println(vo.get(i).getMean());
+									
+									//힌트횟수
+									int hintCnt = 0;
 									
 									//힌트보기 선택지 주기? 1번 정답입력 2번 힌트보기
-									System.out.print("1번 정답입력 2번 힌트보기 >>>");
+									System.out.print("1번 정답입력 2번 힌트보기 >>> ");
 									int num3 = sc.nextInt();
 									
 									if(num3 == 1) {
@@ -91,8 +97,27 @@ public class ViewMain {
 										System.out.print("정답 입력! >>> ");
 										String str = sc.next();
 										
-									}else if(num3 == 2) {
+										if(vo.get(i).getWord().equals(str)) {
+											score++;
+											System.out.println("정답입니다!");
+											System.out.println();
+										}else {
+											System.out.println("정답은 : "+vo.get(i).getWord() + " 입니다.");
+											System.out.println();
+										}
 										
+									}else if(num3 == 2) {
+										if(hintCnt == 0) {
+											//힌트 1번 출력
+											System.out.println("첫번째 힌트 입니다!!");
+											System.out.println(vo.get(i).getHint1());	
+											hintCnt++;
+										}else if(hintCnt == 1) {
+											System.out.println("두번째 힌트 입니다!! 모든힌트를 다 보셨습니다!!");
+											System.out.println(vo.get(i).getHint2());
+											
+											hintCnt = 0;
+										}
 									}else {
 										System.out.println("잘못 입력!");
 									}
