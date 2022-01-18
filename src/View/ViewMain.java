@@ -67,8 +67,6 @@ public class ViewMain {
 							System.out.print("1번 2000년대, 2번 2010년대, 3번 2020년대 선택 >>> ");
 							int yearNum = sc.nextInt();
 							
-							int score = 0;
-							
 							System.out.println("게임을 시작!!!!");
 							
 							if(yearNum == 1) {// 2000년대
@@ -81,46 +79,57 @@ public class ViewMain {
 								yearNum = 2000;
 								ArrayList<WordListVO> vo = wordDAO.wordList(yearNum);
 								
-								for (int i = 0; i < 10; i++) {
+								for (int i = 0; i < 1; i++) {
+									//1.문제출력
+									//2.1번 힌트보기 선택지? 2번 정답입력 
+									//3.1번, 2번 선택
+									//4.1번 입력시 힌트보여주고 정답입력 또는 다음힌트보기 선택
+									//5.두번째 힌트보면 정답입력 후 다음문제 출력
+									//6.문제 다풀면 점수안보여주고 끝?
+									
 									//문제출력
 									System.out.println(vo.get(i).getMean());
 									
 									//힌트횟수
 									int hintCnt = 0;
 									
-									//힌트보기 선택지 주기? 1번 정답입력 2번 힌트보기
-									System.out.print("1번 정답입력 2번 힌트보기 >>> ");
-									int num3 = sc.nextInt();
-									
-									if(num3 == 1) {
-										//답 입력
-										System.out.print("정답 입력! >>> ");
-										String str = sc.next();
+									while(true) {
+										//힌트보기 선택지 주기? 1번 정답입력 2번 힌트보기
+										System.out.print("1번 정답입력 2번 힌트보기 >>> ");
+										int num3 = sc.nextInt();
 										
-										if(vo.get(i).getWord().equals(str)) {
-											score++;
-											System.out.println("정답입니다!");
-											System.out.println();
-										}else {
-											System.out.println("정답은 : "+vo.get(i).getWord() + " 입니다.");
-											System.out.println();
-										}
-										
-									}else if(num3 == 2) {
-										if(hintCnt == 0) {
-											//힌트 1번 출력
-											System.out.println("첫번째 힌트 입니다!!");
-											System.out.println(vo.get(i).getHint1());	
-											hintCnt++;
-										}else if(hintCnt == 1) {
-											System.out.println("두번째 힌트 입니다!! 모든힌트를 다 보셨습니다!!");
-											System.out.println(vo.get(i).getHint2());
+										if(num3 == 1) {
+											//답 입력
+											System.out.print("정답 입력! >>> ");
+											String str = sc.next();
 											
-											hintCnt = 0;
+											if(vo.get(i).getWord().equals(str)) {
+												userDAO.insertScore(10, id);
+												System.out.println("정답입니다!");
+												System.out.println();
+												
+											}else {
+												System.out.println("정답은 : "+vo.get(i).getWord() + " 입니다.");
+												System.out.println();
+											}
+											
+										}else if(num3 == 2) {
+											if(hintCnt == 0) {
+												//힌트 1번 출력
+												System.out.println("첫번째 힌트 입니다!!");
+												System.out.println(vo.get(i).getHint1());	
+												hintCnt++;
+											}else if(hintCnt == 1) {
+												System.out.println("두번째 힌트 입니다!! 모든힌트를 다 보셨습니다!!");
+												System.out.println(vo.get(i).getHint2());
+												
+												hintCnt = 0;
+											}
+										}else {
+											System.out.println("잘못 입력!");
 										}
-									}else {
-										System.out.println("잘못 입력!");
 									}
+									
 									
 									
 									
@@ -138,9 +147,24 @@ public class ViewMain {
 							
 							
 						}else if(num == 2) {//누적결과보기
-							
+							 int score = 0;
+		                     System.out.println(score + "점 입니다.!");
+
+		                     if (score > 80) {
+		                        System.out.println("당신은 상등급 입니다!");
+
+		                     } else if (score > 60) {
+		                        System.out.println("당신은 중등급 입니다!");
+		                     } else if (score > 40) {
+		                        System.out.println("당신은 하등급 입니다!");
+		                     } else {
+		                        System.out.println("당신은 최하등급 입니다!");
+		                     }
+
 						}else if(num == 3) {//랭킹확인
-							
+							 System.out.println("=========랭킹 확인=========");
+		                     System.out.println(userDAO.rank());
+
 						}else if(num == 4) {//로그아웃
 							System.out.println("로그아웃!!");
 							break;

@@ -105,7 +105,47 @@ public class UserInfoDAO {
 		return check;
 	}// end of login
 	
+	public void insertScore(int score, String id) {
+		
+		try {
+			
+			connect();
+			
+			String sql = "UPDATE USER_INFO SET SCORE = ? WHERE ID = ?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, score);
+			pst.setString(2, id);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+	}
 	
+	
+	// rank_분석
+	   public boolean rank() {
+
+	      try {
+
+	         connect();
+
+	         String sql = "SELECT ID, SCORE FROM USER_INFO ORDER BY SCORE DESC";
+
+	         pst = conn.prepareStatement(sql);
+	         rs = pst.executeQuery();
+
+	         
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close();
+	      }
+	      return check;
+	   }
 	
 	
 	
