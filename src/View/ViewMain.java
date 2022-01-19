@@ -18,84 +18,122 @@ public class ViewMain {
 		UserInfoDAO userDAO = new UserInfoDAO();
 		WordListDAO wordDAO = new WordListDAO();
 
-		//컨트롤러 객체 생성
+		// 컨트롤러 객체 생성
 		GameStartController con = new GameStartController();
-		
+
 		// MP3Player 사용하기 위해 가장먼저해야할일!
 		MP3Player mp3 = new MP3Player();
 
 		// Music music1 = new Music("C:\\nope.mp3");
 
-		System.out.println("　　　　  ∧＿∧　　　　 ");
-		System.out.println("　 　　 (*･∀･*)　　　　 ");
-		System.out.println("★*。。:ﾟ*〇☆〇*ﾟ:。。:*★");
-		System.out.println("☆｡。*･:+*ﾟ　　 ﾟ*+:･*｡。☆");
-		System.out.println("▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ ");
-		System.out.println("　     년  도  별　     ");
-		System.out.println("　   문 제 맞 추 기　   ");
-		System.out.println("       게   임       ");
-		System.out.println("▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
-		System.out.println();
-		System.out.println("신규 유저는 회원가입을 진행 후 로그인해!!^^");
+		mp3.play("C:\\시작bgm.mp3");
+
+		System.out.println("　　　　 　　　　  ∧＿∧　　　　 ");
+		System.out.println("　　　　 　 　　 (*･∀･*)　　　　 ");
+		System.out.println("　　　　 ★*。。:ﾟ*〇☆〇*ﾟ:。。:*★");
+		System.out.println("　　　　 ☆｡。*･:+*ﾟ　　 ﾟ*+:･*｡。☆");
+		System.out.println("　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ ");
+		System.out.println("　     　　　　 년  도  별　     ");
+		System.out.println("　　　　 　    문 제 맞 추 기　   ");
+		System.out.println("　　　　         게   임       ");
+		System.out.println("　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+		System.out.println("");
+		System.out.println("");
 
 		while (true) {
-			System.out.print("1번 회원가입 2번 로그인 3번 종료 번호 입력 >>>> ");
+			System.out.println("　　　　 ╔═════ °• ♔ •° ═════╗ ");
+			System.out.println("　　　　        ①.회원가입       ");
+			System.out.println("　　　　        ②.로그인        ");
+			System.out.println("　　　　        ③.종료         ");
+			System.out.println("　　　　 ╚═════ °• ♔ •° ═════╝");
+			System.out.print("　　　　  　번호선택 >>>>  ");
+
 			int choice = sc.nextInt();
 
 			if (choice == 1) { // 회원가입
-				System.out.println("☆★☆★회원가입 진행 중☆★☆★");
-				System.out.print("아이디 입력해!! ");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("　　 ☆★‿︵‿︵ʚ˚̣̣̣͙ɞ・회 원 가 입 중ʚ˚̣̣̣͙ɞ‿︵‿︵ ☆★");
+				System.out.print("　　　　  　　　ID : ");
 				String id = sc.next();
-				System.out.print("비밀번호 입력해!! ");
+				System.out.print("　　　　  　　　PW : ");
 				String pw = sc.next();
 
 				boolean check = userDAO.insertUser(id, pw);
 
 				if (check) {
-					System.out.println("아이디 생성 성공!!");
+					System.out.println("");
+					System.out.println("　　　　  아이디 생성 성공 ⁽⁽٩( ᐖ )۶⁾⁾");
+
 				} else {
-					System.out.println("아이디 생성 실패!!");
+					System.out.println("");
+					System.out.println("　　　　  아이디 생성 실패 (ˋ⌒T) ");
+
 				}
 				System.out.println();
 			} else if (choice == 2) { // 로그인
-				System.out.println("☆★☆★로그인 중☆★☆★");
-				System.out.print("아이디 입력해!! ");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("　☆★‿︵‿︵‿︵ʚ˚̣̣̣͙ɞ・로 그 인 중ʚ˚̣̣̣͙ɞ‿︵‿︵‿︵ ☆★");
+				System.out.print("　　　　  　　　ID : ");
 				String id = sc.next();
-				System.out.print("비밀번호 입력해!! ");
+				System.out.print("　　　　  　　　PW : ");
 				String password = sc.next();
 
 				boolean check = userDAO.login(id, password);
 				System.out.println();
 
 				if (check) {
-					System.out.println("로그인 성공!!");
-					mp3.play("C:\\nope.mp3");
+					if (mp3.isPlaying()) {
+						mp3.stop();
+					}
+					System.out.println("　　　　  로그인 성공 ⁽⁽٩( ᐖ )۶⁾⁾");
+
 					System.out.println();
 
 					while (true) {
-						System.out.println("☆★☆★☆★1번 게임하기☆★☆★☆★");
-						System.out.println("☆★☆★☆★2번 누적결과☆★☆★☆★");
-						System.out.println("☆★☆★☆★3번 랭킹확인☆★☆★☆★");
-						System.out.println("☆★☆★☆★4번 로그아웃☆★☆★☆★");
-						System.out.print("번호 선택 >>>>>>>>>>>>>>>>>>>>> ");
+						System.out.println("　　　　 ╔═════ °• ♔ •° ═════╗ ");
+						System.out.println("　　　　        ①.게임하기       ");
+						System.out.println("　　　　        ②.누적결과       ");
+						System.out.println("　　　　        ③.랭킹확인       ");
+						System.out.println("　　　　        ④.로그아웃       ");
+						System.out.println("　　　　 ╚═════ °• ♔ •° ═════╝");
+						System.out.print("　　　　  　번호선택 >>>>  ");
 						int num = sc.nextInt();
+						System.out.println();
 
 						if (num == 1) {// 게임하기
-							System.out.print("1번 2000년대, 2번 2010년대, 3번 2020년대 선택 >>> ");
-							int yearNum = sc.nextInt();
 							
-							System.out.println("게임을 시작!!!!");
 
+							System.out.println("");
+							System.out.println("　　　　 ╭ ⁀ ⁀ ╮");
+							System.out.println("　　　　 ( '👅' )~ ① 2000년대");
+							System.out.println("　　　　 ╰ ‿ ‿ ╯");
+							System.out.println("　　　　 　　　     　   　　　　  ╭ ⁀ ⁀ ╮");
+							System.out.println("　　　　 　　       ② 2010년대 ~( '👅'　)");
+							System.out.println("　　　　 　　　　　　        　　  ╰ ‿ ‿ ╯");
+							System.out.println("　　　　 ╭ ⁀ ⁀ ╮");
+							System.out.println("　　　　 ( '👅' )~ ③ 2020년대");
+							System.out.println("　　　　 ╰ ‿ ‿ ╯");
+							System.out.print("　　　　  　번호선택 >>>>  ");
+							int yearNum = sc.nextInt();
+
+							System.out.println();
+							System.out.println(" 　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+							System.out.println("　　　　         s t a r t     ");
+							System.out.println(" 　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
+
+							System.out.println();
 							if (yearNum == 1) {// 2000년대
-								//게임시작호출
+								// 게임시작호출
 								con.start(2000, id);
 							} else if (yearNum == 2) {// 2010년대
-								//게임시작호출
+								// 게임시작호출
 								// 2010년대
 								con.start(2010, id);
 
 							} else if (yearNum == 3) {// 2020년대
-								//게임시작호출
+								// 게임시작호출
 								// 2020년대
 								con.start(2020, id);
 
@@ -108,6 +146,9 @@ public class ViewMain {
 							System.out.println(totalScore + "점 입니다.!");
 
 							if (totalScore > 80) {
+								// 효과음 출력
+								mp3.play("C:\\80점.mp3");
+
 								System.out.println("⊂_ ヽ、");
 								System.out.println("　 ＼＼ Λ＿Λ");
 								System.out.println("　　 ＼( ‘ㅅ’ ) 두둠칫");
@@ -125,6 +166,9 @@ public class ViewMain {
 								System.out.println("시대를 아우르는 당신!! 유행어의 마스터 이시군요!");
 
 							} else if (totalScore > 60) {
+								// 효과음 출력
+								mp3.play("C:\\60점.mp3");
+
 								System.out.println("      ∧＿∧");
 								System.out.println("   　（´・ω・)つ＿  ∧");
 								System.out.println("     （つ　 / (・ω・｡)");
@@ -133,12 +177,17 @@ public class ViewMain {
 								System.out.println(" 그래도 노력하는 당신..쫌만 더 열심히 하세요!");
 
 							} else if (totalScore > 40) {
+								// 효과음 출력
+								mp3.play("C:\\40점.mp3");
 
 								System.out.println(" ༼ ºل͟º ༼ ºل͟º ༼ ºل͟º ༽ ºل͟º ༽ ºل͟º ༽");
 								System.out.println("");
 								System.out.println("조금 더 유행어 공부를 해보시는게 어떤가요?");
 
 							} else {
+								// 효과음 출력
+								mp3.play("C:\\0점.mp3");
+
 								System.out.println(" ┏━━━━━┓ ");
 								System.out.println("┃  　 　 ┃ ");
 								System.out.println("┃　┏ ━┓　┃");
@@ -169,6 +218,9 @@ public class ViewMain {
 							System.out.println();
 
 						} else if (num == 4) {// 로그아웃
+							// 로그아웃 효과음 출력
+							mp3.play("C:\\종료.mp3");
+
 							System.out.println("로그아웃!!");
 							break;
 						} else {
@@ -182,6 +234,7 @@ public class ViewMain {
 
 			} else if (choice == 3) { // 종료
 				System.out.println("종료!!");
+				mp3.play("C:\\종료.mp3");
 				break;
 			} else { // 잘못입력
 				System.out.println("잘못 입력!!");
