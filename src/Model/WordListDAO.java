@@ -53,6 +53,7 @@ public class WordListDAO {
 		
 		ArrayList<WordListVO> al = new ArrayList<WordListVO>();
 		
+		
 		try {
 			String sql = "SELECT * FROM WORD_LIST WHERE YEAR = ?";
 			
@@ -73,6 +74,7 @@ public class WordListDAO {
 				//위에서 읽어온 값들로 초기화시켜 생성한 StudentVO 객체의 참조값을
 				//ArrayList에 추가
 				al.add(new WordListVO(word, mean, year, hint1, hint2));
+				
 				
 			}
 		}catch (Exception e){

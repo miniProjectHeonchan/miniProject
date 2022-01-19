@@ -55,7 +55,9 @@ public class ViewMain {
 				if (check) {
 					System.out.println("로그인 성공!!");
 					System.out.println();
-
+					
+					int resultGameScore = 0;// 2번 누적결과
+					
 					while (true) {
 						System.out.println("☆★☆★☆★1번 게임하기☆★☆★☆★");
 						System.out.println("☆★☆★☆★2번 누적결과☆★☆★☆★");
@@ -69,7 +71,8 @@ public class ViewMain {
 							int yearNum = sc.nextInt();
 
 							System.out.println("게임을 시작!!!!");
-
+							resultGameScore = 0;
+							
 							if (yearNum == 1) {// 2000년대
 								// 2000년대
 
@@ -77,12 +80,23 @@ public class ViewMain {
 								ArrayList<WordListVO> vo = wordDAO.wordList(yearNum);
 								int score = 0; // 문제 점수
 
+								
+								int[] meanLength = new int[vo.size()];
+								for(int i = 0;i < vo.size();i++) {
+									meanLength[i] = i;
+								}
+								
+								
+								
+								
 								for (int i = 0; i < 3; i++) {
 
 									// 문제출력
 									System.out.println(vo.get(i).getMean());
+									
+									//힌트점수누적
 									int hintScore = 0;
-									// 힌트횟수
+									// 힌트 본 횟수
 									int hintCnt = 0;
 
 									while (true) {
@@ -96,9 +110,10 @@ public class ViewMain {
 											String str = sc.next();
 
 											if (vo.get(i).getWord().equals(str)) {
+												
 												// 점수추가
 												score += 10 - hintScore;
-
+												resultGameScore = 10 - hintScore;
 												System.out.println("정답입니다!");
 												System.out.println();
 												break;
@@ -144,15 +159,13 @@ public class ViewMain {
 							}
 
 						} else if (num == 2) {// 누적결과보기
-							int totalScore = userDAO.getScore(id);
-							System.out.println(totalScore + "점 입니다.!");
+							System.out.println(resultGameScore + "점 입니다.!");
 
-							if (totalScore > 80) {
+							if (resultGameScore > 80) {
 								System.out.println("당신은 상등급 입니다!");
-
-							} else if (totalScore > 60) {
+							} else if (resultGameScore > 60) {
 								System.out.println("당신은 중등급 입니다!");
-							} else if (totalScore > 40) {
+							} else if (resultGameScore > 40) {
 								System.out.println("당신은 하등급 입니다!");
 							} else {
 								System.out.println("당신은 최하등급 입니다!");
