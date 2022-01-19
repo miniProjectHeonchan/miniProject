@@ -24,8 +24,6 @@ public class ViewMain {
 		// MP3Player 사용하기 위해 가장먼저해야할일!
 		MP3Player mp3 = new MP3Player();
 
-		// Music music1 = new Music("C:\\nope.mp3");
-
 		mp3.play("C:\\시작bgm.mp3");
 
 		System.out.println("　　　　 　　　　  ∧＿∧　　　　 ");
@@ -81,15 +79,13 @@ public class ViewMain {
 				System.out.print("　　　　  　　　PW : ");
 				String password = sc.next();
 				
-				System.out.println(check);
 				check = userDAO.login(id, password);
-				System.out.println(check);
 				System.out.println();
 
 				if (check) {
 					
-					if (mp3.isPlaying()) {
-						mp3.stop();
+					if(mp3.isPlaying()) {
+						mp3.stop();			
 					}
 					
 					System.out.println("　　　　  로그인 성공 ⁽⁽٩( ᐖ )۶⁾⁾");

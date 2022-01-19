@@ -88,8 +88,8 @@ public class UserInfoDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				String get_id = rs.getString("ID"); // 현재 커서가 가르키고 있는 행의 첫번째 컬럼값을 읽어오겠다!
-				String get_password = rs.getString("PASSWORD"); // 컬럼이름과 일치하게 작성
+				String get_id = rs.getString("ID");
+				String get_password = rs.getString("PASSWORD");
 				
 				// 입력받은 id와 데이터베이스 id와 password 비교
 				if (get_id.equals(id) && get_password.equals(password)) {

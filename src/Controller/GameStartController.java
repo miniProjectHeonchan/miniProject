@@ -10,7 +10,8 @@ import Model.WordListVO;
 import javazoom.jl.player.MP3Player;
 
 public class GameStartController {
-
+	
+	//게임 시작 메서드
 	public static void start(int yearNum, String id) {
 		Scanner sc = new Scanner(System.in);
 		UserInfoDAO userDAO = new UserInfoDAO();
@@ -140,7 +141,7 @@ public class GameStartController {
 		// 문제가 끝나고 효과음 출력
 		mp3.play("C:\\문제끝.mp3");
 		System.out.println();
-
 	}
 
+	
 }
