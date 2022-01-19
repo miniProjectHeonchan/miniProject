@@ -77,6 +77,7 @@ public class UserInfoDAO {
 
 	// 로그인 기능
 	public boolean login(String id, String password) {
+		boolean check1 = false;
 
 		try {
 			// jdbc 드라이버 불러오기
@@ -89,10 +90,10 @@ public class UserInfoDAO {
 			while (rs.next()) {
 				String get_id = rs.getString("ID"); // 현재 커서가 가르키고 있는 행의 첫번째 컬럼값을 읽어오겠다!
 				String get_password = rs.getString("PASSWORD"); // 컬럼이름과 일치하게 작성
-
+				
 				// 입력받은 id와 데이터베이스 id와 password 비교
 				if (get_id.equals(id) && get_password.equals(password)) {
-					check = true;
+					check1 = true;
 				}
 			}
 		} catch (Exception e) {
@@ -100,7 +101,7 @@ public class UserInfoDAO {
 		} finally {
 			close();
 		}
-		return check;
+		return check1;
 	}// end of login
 
 	public void updateScore(int score, String id) {

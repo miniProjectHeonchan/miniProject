@@ -49,7 +49,7 @@ public class ViewMain {
 			System.out.print("　　　　  　번호선택 >>>>  ");
 
 			int choice = sc.nextInt();
-
+			
 			if (choice == 1) { // 회원가입
 				System.out.println("");
 				System.out.println("");
@@ -72,6 +72,7 @@ public class ViewMain {
 				}
 				System.out.println();
 			} else if (choice == 2) { // 로그인
+				boolean check = false;
 				System.out.println("");
 				System.out.println("");
 				System.out.println("　☆★‿︵‿︵‿︵ʚ˚̣̣̣͙ɞ・로 그 인 중ʚ˚̣̣̣͙ɞ‿︵‿︵‿︵ ☆★");
@@ -79,14 +80,18 @@ public class ViewMain {
 				String id = sc.next();
 				System.out.print("　　　　  　　　PW : ");
 				String password = sc.next();
-
-				boolean check = userDAO.login(id, password);
+				
+				System.out.println(check);
+				check = userDAO.login(id, password);
+				System.out.println(check);
 				System.out.println();
 
 				if (check) {
+					
 					if (mp3.isPlaying()) {
 						mp3.stop();
 					}
+					
 					System.out.println("　　　　  로그인 성공 ⁽⁽٩( ᐖ )۶⁾⁾");
 
 					System.out.println();
@@ -118,11 +123,7 @@ public class ViewMain {
 							System.out.print("　　　　  　번호선택 >>>>  ");
 							int yearNum = sc.nextInt();
 
-							System.out.println();
-							System.out.println(" 　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
-							System.out.println("　　　　         s t a r t     ");
-							System.out.println(" 　　　　 ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀");
-
+							
 							System.out.println();
 							if (yearNum == 1) {// 2000년대
 								// 게임시작호출
@@ -207,7 +208,11 @@ public class ViewMain {
 							System.out.println();
 						} else if (num == 3) {// 랭킹확인
 							// 1.모든 사용자 출력 점수에 따라 정렬 후 출력
-							System.out.println("=========랭킹 확인=========");
+							System.out.println("　　　　  +*.｡ﾟ ･*･:*:｡*+。*｡:ﾟ+");
+							System.out.println("　　　　 ＼＼ヽ ٩( 'ω' )و /／／");
+							System.out.println("　　　　 （￣￣￣￣￣￣￣￣￣￣）");
+							System.out.println(" 　　　　  world Ranking");
+							System.out.println("（　　　　 ￣￣￣￣￣￣￣￣￣￣）");
 
 							ArrayList<UserInfoVO> rank = userDAO.rank();
 							for (int i = 0; i < 10; i++) {
@@ -221,23 +226,31 @@ public class ViewMain {
 							// 로그아웃 효과음 출력
 							mp3.play("C:\\종료.mp3");
 
-							System.out.println("로그아웃!!");
+							System.out.println("　　　　  ∧_∧");
+							System.out.println("　　　　 (･ω･ )");
+							System.out.println("　　　　 ｏ┳o　）");
+							System.out.println("　　　　 ◎┻し'◎ ≡");
+							System.out.println("　　　　 로그아웃 ...");
+							System.out.println("");
 							break;
 						} else {
-							System.out.println("잘못입력!!");
+							System.out.println("　　　　☆★잘못입력 1부터 4사이 숫자입력☆★");
 						}
 					}
 
 				} else {
-					System.out.println("로그인 실패!!");
+					System.out.println("　　　　☆★로그인 실패!!☆★");
 				}
 
 			} else if (choice == 3) { // 종료
-				System.out.println("종료!!");
+				System.out.println("　　　　   ＼＼BYE／／");
+				System.out.println("　　　　  ∧＿ﾍ　   ﾍ＿∧ ");
+				System.out.println("　　　　 （／ω･)人(･ω＼ ) ");
+				System.out.println("　　　　 ／`　／　  ＼　`＼");
 				mp3.play("C:\\종료.mp3");
 				break;
 			} else { // 잘못입력
-				System.out.println("잘못 입력!!");
+				System.out.println("　　　　☆★잘못 입력!!☆★");
 			}
 
 		} // end of while
