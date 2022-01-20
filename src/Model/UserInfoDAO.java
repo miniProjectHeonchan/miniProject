@@ -86,7 +86,7 @@ public class UserInfoDAO {
 			String sql = "SELECT ID, PASSWORD FROM USER_INFO";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
-
+			
 			while (rs.next()) {
 				String get_id = rs.getString("ID");
 				String get_password = rs.getString("PASSWORD");
@@ -123,37 +123,6 @@ public class UserInfoDAO {
 		}
 	}
 
-	// 누적결과보기
-	public int totalResult(String id) {
-
-		int getScore = 0;
-		UserInfoVO vo = new UserInfoVO();
-
-		try {
-
-			connect();
-
-			String sql = "SELECT ID, SCORE FROM USER_INFO";
-
-			pst = conn.prepareStatement(sql);
-			rs = pst.executeQuery();
-			if (rs.next()) {
-				String get_id = rs.getString("ID"); // 현재 커서가 가르키고 있는 행의 첫번째 컬럼값을 읽어오겠다!
-				int score = rs.getInt("SCORE"); // 컬럼이름과 일치하게 작성
-
-				// 입력받은 id와 데이터베이스 id와 password 비교
-				if (get_id.equals(id)) {
-					getScore = vo.getSCORE();
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return getScore;
-	}
 
 	// 데이터베이스에 점수가져오는 기능
 	public int getScore(String id) {
@@ -196,7 +165,6 @@ public class UserInfoDAO {
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
 			
-			rs = pst.executeQuery();
 			while(rs.next()) {
 				String id = rs.getString("ID"); 
 				int score = rs.getInt("SCORE");

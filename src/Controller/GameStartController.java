@@ -55,8 +55,9 @@ public class GameStartController {
                 System.out.println();
 				System.out.print("　　　　  　번호선택 >>>>  ");
 
-				int num3 = sc.nextInt();
 
+				int num3 = sc.nextInt();
+				
 				if (num3 == 1) {
 					// 답 입력
 					System.out.print("　　　　  　정답입력 >>>> ");

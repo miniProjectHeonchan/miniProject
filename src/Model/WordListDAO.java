@@ -47,7 +47,7 @@ public class WordListDAO {
 	}
 	
 	//문제 뜻 불러오는 메소드
-	public ArrayList<WordListVO> wordList(int yearNum) {
+	public  ArrayList<WordListVO> wordList(int yearNum) {
 		//jdbc 드라이버 불러오기
 		connect();
 		

@@ -56,8 +56,8 @@ public class ViewMain {
 				String id = sc.next();
 				System.out.print("　　　　  　　　PW : ");
 				String pw = sc.next();
-
-				boolean check = userDAO.insertUser(id, pw);
+				
+				boolean check = userDAO.insertUser(id, pw); // boolean true나 false
 
 				if (check) {
 					System.out.println("");
@@ -211,6 +211,7 @@ public class ViewMain {
 							System.out.println("（　　　　 ￣￣￣￣￣￣￣￣￣￣）");
 
 							ArrayList<UserInfoVO> rank = userDAO.rank();
+							
 							for (int i = 0; i < 10; i++) {
 								System.out.print((i + 1) + "위 아이디 : " + rank.get(i).getID());
 								System.out.print("\t\t점수 : " + rank.get(i).getSCORE());
